@@ -1,6 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const productRoute = require("./routes/product.route");
+require("dotenv").config();
 
 const app = express();
 
@@ -13,10 +14,10 @@ app.get("/", (req, res) => {
   res.send("Hello World");
 });
 
+
+const port = process.env.PORT || 3000;
 mongoose
-  .connect(
-    "mongodb+srv://victoraremu:4C7GhfcE9aPC7YtS@nodedb.ywhms.mongodb.net/NODE-API?retryWrites=true&w=majority&appName=nodeDB"
-  )
+  .connect(process.env.MONGODB_URI)
   .then(() => {
     console.log("Connected to MongoDB");
     app.listen(3000, () => {
